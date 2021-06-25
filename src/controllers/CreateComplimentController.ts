@@ -3,7 +3,9 @@ import { CreateComplimentService } from "../services/CreateComplimentService";
 
 class CreateComplimentController {
   async handle(request: Request, response: Response) {
-    const { message, tag_id, user_receiver, user_sender } = request.body;
+    const { message, tag_id, user_receiver } = request.body;
+
+    const { user_id } = request;
 
     const createComplimentService = new CreateComplimentService();
 
@@ -11,7 +13,7 @@ class CreateComplimentController {
       message,
       tag_id,
       user_receiver,
-      user_sender,
+      user_sender: user_id,
     });
 
     return response.json(compliment);
